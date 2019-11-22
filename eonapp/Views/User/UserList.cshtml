@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewData["Title"] = "UserList";
+}
+
+<h2>Users</h2>
+
+<script>
+    const uri = '../api/UsersApi';
+    let users = [];
+
+    function getUsers() {
+        fetch(uri)
+            .then(response => response.json())
+            .then(data => _displayItems(data))
+            .catch(error => console.error('Unable to get items.', error));
+    }
+
+    function _displayItems(data) {
+        console.log(data);
+        const tBody = document.getElementById('users');
+        tBody.innerHTML = '';
+        data.forEach(item => {
+            let tr = tBody.insertRow();
+            let td1 = tr.insertCell(0);
+            td1.append(item.id);
+
+            let td2 = tr.insertCell(1);
+            td2.append(item.name);
+
+            let td3 = tr.insertCell(2);
+            td3.append(item.email);
+
+            let td4 = tr.insertCell(3);
+            td4.append(item.gender);
+
+            let td5 = tr.insertCell(4);
+            td5.append(item.shortRegisteredDate);
+
+            let td6 = tr.insertCell(5);
+            td6.append(item.days);
+
+            let td7 = tr.insertCell(6);
+            td7.append(item.request);
+            
+        });
+    }
+
+  
+</script>
+
+<div>
+    <script type="text/javascript">
+        getUsers();
+    </script>
+
+    <table class="table table-responsive">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Date Reg</th>
+            <th>Selected Days</th>
+            <th>Add Request</th>
+        </tr>
+        <tbody id="users">
+        
+        </tbody>
+    </table>
+</div>
